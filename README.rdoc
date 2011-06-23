@@ -1,0 +1,24 @@
+= Detroit Syntax Tool
+
+
+== DESCRIPTION
+
+The Syntax tool simply checks all Ruby code for syntax errors.
+It is a rather trivial tool, and is here mainly for example sake.
+
+NOTE: This method shells out to the command line using `ruby -c`.
+
+
+== INSTALL
+
+  $ gem install detroit-syntax
+
+
+== COPYRIGHT
+
+Copyright (c) 2011 Thomas Sawyer
+
+GPL v.3 license
+
+See COPYING.rdoc and GPL3.txt file for details.
+
