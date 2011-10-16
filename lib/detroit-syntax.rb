@@ -1,3 +1,5 @@
+require 'detroit/tool'
+
 module Detroit
 
   # Create a new Syntax tool with the specified +options+.
