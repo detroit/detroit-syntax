@@ -1,16 +1,21 @@
 ---
-name : detroit-syntax
-title: Detroit Syntax
-
-contact: trans <transfire@gmail.com>
+name    : detroit-syntax
+version : 0.1.0
+title   : Detroit Syntax
+summary : Ruby syntax checker plugin for Detroit
 
 description:
-  RUby syntax checker plugin for Detroit build system.
+  Ruby syntax checker plugin for Detroit build system.
 
 resources:
   home: http://detroit.github.com/
   code: http://github.com/detroit/detroit-syntax
+  mail: http://groups.google.com/group/rubyworks-mailinglist
 
-copyright:
-  (c) 2011 Thomas Sawyer
+authors:
+  - trans <transfire@gmail.com>
+
+copyrights:
+  (c) 2011 Thomas Sawyer, Rubyworks (GPL-3)
+
 
