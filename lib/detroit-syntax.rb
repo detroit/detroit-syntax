@@ -41,6 +41,17 @@ module Detroit
       @log
     end
 
+
+    #  A S S E M B L Y  S T A T I O N S
+
+    # Attach check method to test station.
+    def station_test
+      check
+    end
+
+
+    #  S E R V I C E  M E T H O D S
+
     #
     def logfile
       case log
@@ -85,7 +96,7 @@ module Detroit
       end
     end
 
-    private
+  private
 
     #
     def syntax_check_file(file, max=nil)
@@ -133,8 +144,6 @@ module Detroit
         end
       end
     end
-
-    private
 
     #
     def libsI
