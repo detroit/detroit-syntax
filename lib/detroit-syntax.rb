@@ -130,23 +130,24 @@ module Detroit
     # Create syntax log.
     def log_syntax_errors(list)
       #logfile = project.log + 'syntax.log'
-      if list.empty?
-        mkdir_p(logfile.parent)
-        #logfile.write('') #logfile.clear
-        File.open(logfile, 'w'){ |f| f << '' }
-      else
-        puts "\n-- Syntax Errors --\n"
-        list.each do |file|
-          print "* #{file}"
-          err = `ruby -c #{opt_I} #{extra} #{file} 2>&1`
-          puts(err) if verbose?
-          mkdir_p(logfile.parent)
-          # logfile.write("=== #{file}\n#{err}\n\n")
-          File.open(logfile, 'w') do |f|
-            f << "=== #{file}\n#{err}\n\n"
+      mkdir_p(logfile.parent)
+      begin
+        file = File.open(logfile, 'w+')
+        file << "= SYNTAX ERROR LOG\n"
+        file << "\n(#{Time.now})\n\n"
+        if list.empty?
+          file << "No Syntax Errors."
+        else
+          list.each do |file|
+            err = `ruby -c #{opt_I} #{extra} #{file} 2>&1`
+            file << "== #{file}\n#{err}\n\n"
           end
         end
+        file << "\n\n"
+      ensure
+        file.close
       end
+
     end
 
     #
