@@ -1,4 +1,8 @@
 ---
+syntax:
+  files: lib
+  log: true
+
 gem:
   active: true
 
