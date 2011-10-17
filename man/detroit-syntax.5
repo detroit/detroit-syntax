@@ -1,0 +1,59 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "DETROIT\-SYNTAX" "5" "October 2011" "" ""
+.
+.SH "NAME"
+\fBdetroit\-syntax\fR \- ruby syntax checker plug\-in for detroit
+.
+.SH "DESCRIPTION"
+The Syntax plug\-in for Detroit will make sure your ruby scripts are syntax error free\. This plug\-in shells out to \fBruby \-c\fR\.
+.
+.P
+Clearly this ia a rather trivial plug\-in, and is here mainly for example sake\.
+.
+.SH "OPTIONS"
+The following options can be used in the Detroit assembly file for defining a Syntax service\.
+.
+.IP "\(bu" 4
+\fBfiles\fR \- Test files to include\.
+.
+.IP "\(bu" 4
+\fBexclude\fR \- Files or globs to exclude\.
+.
+.IP "\(bu" 4
+\fBignore\fR \- Files to ignore by matching filename\.
+.
+.IP "\(bu" 4
+\fBloadpath\fR \- Directories to add to\fB$LOAD_PATH\fR\. Defaults to \fB[\'lib\']\fR\.
+.
+.IP "\(bu" 4
+\fBextra\fR \- Extra command line options to append to \fBruby\fR command\.
+.
+.IP "\(bu" 4
+\fBlog\fR \- Log results to this file, or set to \fBtrue\fR to use default file \fBlog/syntax\.rdoc\fR\. If not given no log will be created\.
+.
+.IP "" 0
+.
+.SH "EXAMPLES"
+A typical example would look something like:
+.
+.IP "" 4
+.
+.nf
+
+syntax:
+  files: [lib, test]
+.
+.fi
+.
+.IP "" 0
+.
+.SH "COPYRIGHT"
+Copyright (c) 2010 Thomas Sawyer, Rubyworks
+.
+.P
+Detroit Syntax is distributable in accordance with the GPL v\.3 license\.
+.
+.SH "SEE ALSO"
+detroit(1), ruby(1)

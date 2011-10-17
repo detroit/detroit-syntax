@@ -13,25 +13,20 @@ module Detroit
   # NOTE: This method shells out to the command line using `ruby -c`.
   class Syntax < Tool
 
+    # Files to check.
+    attr_accessor :files
+   
     # Add these folders to the $LOAD_PATH.
-    def loadpath
-      @loadpath
-    end
+    attr_accessor :loadpath
 
-    #
-    def loadpath=(x)
-      @loadpath = x.to_list
-    end
+    # Globs to exclude.
+    attr_accessor :exclude
 
-    # Lib files to exclude.
-    def exclude
-      @exclude
-    end
+    # Files to ignore based on file name patterns.
+    attr_accessor :ignore
 
-    #
-    def exclude=(x)
-      @exclude = x.to_list
-    end
+    # Extra options to append to `ruby -c` command.
+    attr_accessor :extra
 
     # File name of log file or +true+ to use default `log/syntax.rdoc` file.
     def log=(file_or_bool)
@@ -54,7 +49,7 @@ module Detroit
 
     #  S E R V I C E  M E T H O D S
 
-    #
+    # If log is given save results to this log file.
     def logfile
       case log
       when String
@@ -66,47 +61,54 @@ module Detroit
 
     # Verify syntax of ruby scripts.
     def check
-      #loadpath = options['loadpath'] || loadpath()
-      #exclude  = options['exclude']  || exclude()
+      list = run_syntax_check
 
-      loadpath = self.loadpath.to_list
-      exclude  = self.exclude.to_list
-
-      files   = multiglob_r(*loadpath) - multiglob_r(exclude)
-      files   = files.select{ |f| File.extname(f) == '.rb' }
-      max     = files.collect{ |f| f.size }.max
-      list    = []
-
-      if logfile.outofdate?(*files) or force?
-        puts "Started"
-
-        start = Time.now
-
-        files.each do |file|
-          pass = syntax_check_file(file, max)
-          list << file if !pass
-        end
-
-        puts "\nFinished in %.6f seconds." % [Time.now - start]
-        puts "\n#{list.size} Syntax Errors"
-
-        log_syntax_errors(list) if log
-
-        list.size == 0 ? true : false
-      else
-        puts "Syntax check is up to date."
+      if log && (logfile.outofdate?(*files) or force?)
+        log_syntax_errors(list)
       end
+
+      abort "Syntax errors found." if list.size > 0
+
+      return true
     end
 
   private
 
     #
+    def run_syntax_check
+      files = gather_files
+      files = files.select{ |f| File.extname(f) == '.rb' }
+
+      max   = files.collect{ |f| f.size }.max
+      list  = []
+
+      puts "Started"
+
+      start = Time.now
+
+      files.each do |file|
+        pass = syntax_check_file(file, max)
+        list << file if !pass
+      end
+
+      puts "\nFinished in %.6f seconds." % [Time.now - start]
+      puts "\n#{list.size} Syntax Errors"
+
+      return list
+    end
+
+    # Collect files to be checked.
+    def gather_files
+      amass(files.to_list, exclude.to_list, ignore.to_list)
+    end
+
+    # Check a file.
     def syntax_check_file(file, max=nil)
       return unless File.file?(file)
       max  = max || file.size + 2
       #libs = loadpath.join(';')
       #r = system "ruby -c -Ibin:lib:test #{s} &> /dev/null"
-      r = system "ruby -c -I#{libsI} #{file} > /dev/null 2>&1"
+      r = system "ruby -c #{opt_I} #{extra} #{file} > /dev/null 2>&1"
       if r
         if verbose?
           printline("%-#{max}s" % file, "[PASS]")
@@ -136,7 +138,7 @@ module Detroit
         puts "\n-- Syntax Errors --\n"
         list.each do |file|
           print "* #{file}"
-          err = `ruby -c -I#{libsI} #{file} 2>&1`
+          err = `ruby -c #{opt_I} #{extra} #{file} 2>&1`
           puts(err) if verbose?
           mkdir_p(logfile.parent)
           # logfile.write("=== #{file}\n#{err}\n\n")
@@ -148,14 +150,20 @@ module Detroit
     end
 
     #
-    def libsI
-      loadpath.join(';')
+    def opt_I
+      loadpath.map{ |r| "-I#{r}" }.join(' ')
     end
 
     #
     def initialize_defaults
       @loadpath = metadata.loadpath
       @exclude  = []
+    end
+
+  public
+
+    def self.man_page
+      File.dirname(__FILE__)+'/../man/detroit-syntax.5'
     end
 
   end

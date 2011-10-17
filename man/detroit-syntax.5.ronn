@@ -1,0 +1,49 @@
+detroit-syntax(5) - ruby syntax checker plug-in for detroit
+===========================================================
+
+## DESCRIPTION
+
+The Syntax plug-in for Detroit will make sure your ruby scripts
+are syntax error free. This plug-in shells out to `ruby -c`.
+
+Clearly this ia a rather trivial plug-in, and is here mainly
+for example sake.
+
+
+## OPTIONS
+
+The following options can be used in the Detroit assembly file
+for defining a Syntax service.
+
+  * `files` - Test files to include.
+
+  * `exclude` - Files or globs to exclude.
+
+  * `ignore` - Files to ignore by matching filename.
+
+  * `loadpath` - Directories to add to`$LOAD_PATH`. Defaults to `['lib']`.
+
+  * `extra` - Extra command line options to append to `ruby` command.
+
+  * `log` - Log results to this file, or set to `true` to use default
+     file `log/syntax.rdoc`. If not given no log will be created.
+
+
+## EXAMPLES
+
+A typical example would look something like:
+
+    syntax:
+      files: [lib, test]
+
+
+## COPYRIGHT
+
+Copyright (c) 2010 Thomas Sawyer, Rubyworks
+
+Detroit Syntax is distributable in accordance with the GPL v.3 license.
+
+
+## SEE ALSO
+
+detroit(1), ruby(1)
