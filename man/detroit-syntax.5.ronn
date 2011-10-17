@@ -37,6 +37,15 @@ A typical example would look something like:
       files: [lib, test]
 
 
+## RESOURCES
+
+For more information:
+
+  * [API Documentation](http://rubydoc.info/gems/detroit-syntax)
+
+  * [Development Site](http://github.com/detroit/detroit-syntax)
+
+
 ## COPYRIGHT
 
 Copyright (c) 2010 Thomas Sawyer, Rubyworks
