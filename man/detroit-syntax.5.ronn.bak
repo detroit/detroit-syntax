@@ -6,7 +6,7 @@ detroit-syntax(5) - ruby syntax checker plug-in for detroit
 The Syntax plug-in for Detroit will make sure your ruby scripts
 are syntax error free. This plug-in shells out to `ruby -c`.
 
-Clearly this is a rather trivial plug-in, and is here mainly
+Clearly this ia a rather trivial plug-in, and is here mainly
 for example sake.
 
 
