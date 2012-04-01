@@ -39,11 +39,22 @@ module Detroit
     end
 
 
-    #  A S S E M B L Y  S T A T I O N S
+    #  A S S E M B L Y  M E T H O D S
+
+    # Attaches check method to test station.
+    def assemble?(station, options={})
+      case station
+      when :test
+        true
+      end
+    end
 
     # Attach check method to test station.
-    def station_test
-      check
+    def assemble(station, options={})
+      case station
+      when :test
+        check
+      end
     end
 
 
