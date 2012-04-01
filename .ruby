@@ -1,4 +1,6 @@
 ---
+source:
+- meta
 authors:
 - name: trans
   email: transfire@gmail.com
@@ -6,24 +8,26 @@ copyrights:
 - holder: Thomas Sawyer, Rubyworks
   year: '2011'
   license: GPL-3
-replacements: []
-conflicts: []
-requirements: []
+requirements:
+- name: detroit
 dependencies: []
+alternatives: []
+conflicts: []
 repositories: []
 resources:
   home: http://detroit.github.com/
   code: http://github.com/detroit/detroit-syntax
   mail: http://groups.google.com/group/rubyworks-mailinglist
+extra: {}
 load_path:
 - lib
-extra: {}
 revision: 0
-name: detroit-syntax
-source: []
-alternatives: []
+created: '2011-10-16'
+summary: Ruby syntax checker plugin for Detroit
 title: Detroit Syntax
 version: 0.1.0
-summary: Ruby syntax checker plugin for Detroit
+name: detroit-syntax
+suite: detroit
 description: Ruby syntax checker plugin for Detroit build system.
-date: '2011-10-16'
+organization: rubyworks
+date: '2012-04-01'

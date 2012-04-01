@@ -1,6 +1,9 @@
 #!mast .ruby bin lib man qed test [A-Z]*.*
 .ruby
 lib/detroit-syntax.rb
+man/detroit-syntax.5
+man/detroit-syntax.5.html
+man/detroit-syntax.5.ronn
+LICENSE.txt
 README.rdoc
-GPL3.txt
 COPYING.rdoc
