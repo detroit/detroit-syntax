@@ -25,7 +25,7 @@ revision: 0
 created: '2011-10-16'
 summary: Ruby syntax checker plugin for Detroit
 title: Detroit Syntax
-version: 0.1.0
+version: 0.2.0
 name: detroit-syntax
 suite: detroit
 description: Ruby syntax checker plugin for Detroit build system.
